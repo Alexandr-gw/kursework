@@ -1,5 +1,5 @@
 from root.db import Database
-from root.entities import Base, Doctor
+from root.entities import Base, Doctor, Patient, Symptom
 
 db = Database()
 Base.metadata.create_all(db.engine)
@@ -14,10 +14,26 @@ with db:
     db.createDoctor(doctor2)
     db.createDoctor(doctor3)
 
+patient1 = Patient(username='superpatient1', name='patient1',surname='patientsuper1',birthdate='',sex='male',patient_password='patient1')
+patient2 = Patient(username='superpatient2', name='patient2',surname='patientsuper2',birthdate='',sex='male',patient_password='patient2')
+patient3 = Patient(username='superpatient3', name='patient3',surname='patientsuper3',birthdate='',sex='female',patient_password='patient3')
 
 
+with db:
+    db.createPatient(patient1)
+    db.createPatient(patient2)
+    db.createPatient(patient3)
 
 
+symptom = Symptom(symptom_name='symptom1')
+patient2 = Patient(username='superpatient2', name='patient2',surname='patientsuper2',birthdate='',sex='male',patient_password='patient2')
+patient3 = Patient(username='superpatient3', name='patient3',surname='patientsuper3',birthdate='',sex='female',patient_password='patient3')
+
+
+with db:
+    db.createPatient(patient1)
+    db.createPatient(patient2)
+    db.createPatient(patient3)
 #
 # player1 = Player(player_username='pashazopin1', balance=120, passwrd='passw')
 # player2 = Player(player_username='pashazopin2', balance=220, passwrd='mypassw')
