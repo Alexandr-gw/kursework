@@ -29,9 +29,14 @@ def patient():
     return render_template('patient_page.html')
 
 
-@app.route('create_drug')
+@app.route('/create_drug')
 def create_drug():
     return render_template('make_drug.html')
+
+
+@app.route('/logout')
+def logout():
+    return "logged out"
 
 
 @app.route('/doctor')
