@@ -65,6 +65,12 @@ def logout():
 def doctor():
     return render_template('doctor_page.html')
 
+@app.route('/show_drugs', method=['GET', 'POST'])
+def show_drugs():
+    if request.method == 'POST':
+        print(request.form.getlist)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
