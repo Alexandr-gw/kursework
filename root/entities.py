@@ -27,15 +27,17 @@ class Patient(Base):
 class Symptom(Base):
     __tablename__ = 'symptom'
     symptom_name = Column(String, primary_key=True)
+    drug = relationship("Drug", cascade="all, delete", passive_deletes=True)
 
 
-class Contraindications(Base):
+class Contraindication(Base):
     name = Column(String, primary_key=True)
     additional_info = Column(String, nullable=True)
+    drug = relationship("Drug", cascade="all, delete", passive_deletes=True)
 
 
 class Drug(Base):
     drug_name = Column(String, primary_key=True)
     price = Column(Float, nullable=False)
-    symptom_name = Column(String, ForeignKey(Symptom.symptom_name, ondelete="cascade"), nullable=False)
-    contraindication = Column(String, ForeignKey(Contraindications.name, ondelete="cascade"), nullable=False)
+    symptom_name = Column(String, ForeignKey(Symptom.symptom_name, ondelete="cascade"), primary_key=True)
+    contraindication = Column(String, ForeignKey(Contraindication.name, ondelete="cascade"), primary_key=True)
