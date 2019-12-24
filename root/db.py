@@ -123,6 +123,6 @@ class Database():
     def close(self):
         self.session.close()
 
-    def createContradiction(self, contradiction):
+    def createContradication(self, contradiction):
         self.session.add(contradiction)
         print("Contradiction created successfully!")

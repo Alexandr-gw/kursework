@@ -1,10 +1,58 @@
 from root.db import Database
-from root.entities import Base
+from root.entities import Base, Doctor, Patient, Symptom, Contraindication, Drug
 
 db = Database()
 Base.metadata.create_all(db.engine)
 
+# doctor1 = Doctor(doctor_username='superdoctor1', name='doctor1',surname='doctorsuper1', doctor_password='superdoctor1')
+# doctor2 = Doctor(doctor_username='superdoctor2', name='doctor2',surname='doctorsuper2', doctor_password='superdoctor2')
+# doctor3 = Doctor(doctor_username='superdoctor3', name='doctor3',surname='doctorsuper3', doctor_password='superdoctor3')
 #
+# with db:
+#     db.createDoctor(doctor1)
+#     db.createDoctor(doctor2)
+#     db.createDoctor(doctor3)
+#
+# patient1 = Patient(username='superpatient1', name='patient1',surname='patientsuper1',birthdate='1998-06-22',sex='male',patient_password='patient1')
+# patient2 = Patient(username='superpatient2', name='patient2',surname='patientsuper2',birthdate='1997-12-03',sex='male',patient_password='patient2')
+# patient3 = Patient(username='superpatient3', name='patient3',surname='patientsuper3',birthdate='1996-09-12',sex='female',patient_password='patient3')
+#
+#
+# with db:
+#     db.createPatient(patient1)
+#     db.createPatient(patient2)
+#     db.createPatient(patient3)
+
+#
+# symptom1 = Symptom(symptom_name='symptom1')
+# symptom2 = Symptom(symptom_name='symptom2')
+# symptom3 = Symptom(symptom_name='symptom3')
+#
+#
+# with db:
+#     db.createSymptom(symptom1)
+#     db.createSymptom(symptom2)
+#     db.createSymptom(symptom3)
+
+# contraindication1 = Contraindication(name='conta1', additional_info='pusto1')
+# contraindication2 = Contraindication(name='conta2', additional_info='pusto2')
+# contraindication3 = Contraindication(name='conta3', additional_info='pusto3')
+#
+# with db:
+#     db.createContradication(contraindication1)
+#     db.createContradication(contraindication2)
+#     db.createContradication(contraindication3)
+
+drug1 = Drug(drug_name='drug1', price=123, symptom_name='symptom1', contraindication='contra1')
+drug2 = Drug(drug_name='drug2', price=144, symptom_name='symptom2', contraindication='contra2')
+drug3 = Drug(drug_name='drug3', price=96,  symptom_name='symptom3', contraindication='contra3')
+
+with db:
+    db.createDrug(drug1)
+    db.createDrug(drug2)
+    db.createDrug(drug3)
+
+
 # player1 = Player(player_username='pashazopin1', balance=120, passwrd='passw')
 # player2 = Player(player_username='pashazopin2', balance=220, passwrd='mypassw')
 # player3 = Player(player_username='pashazopin3', balance=320, passwrd='newpassw')
