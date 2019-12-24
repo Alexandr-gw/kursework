@@ -22,18 +22,20 @@ def login():
     error = None
     if request.method == 'POST':
         user_type = request.form['exampleRadios']
-        username =  request.form['username']
+        username = request.form['username']
         password = request.form['password']
         if user_type == 'patient':
             patients = get_patients(db)
             for patient in patients:
                 if patient['username'] == username and patient['patient_password'] == password:
+                    session['username'] = username
                     return redirect('/patient')
             error = 'There is no patient with this credentials'
         elif user_type == 'doctor':
             doctors = get_doctors(db)
             for doctor in doctors:
                 if doctor['doctor_username'] == username and doctor['doctor_password'] == password:
+                    session['username'] = username
                     return redirect('/doctor')
             error = 'There is no doctor with this credentials'
     return render_template('login.html', error=error)
@@ -41,7 +43,12 @@ def login():
 
 @app.route('/patient')
 def patient():
-    return render_template('patient_page.html')
+    username = session.get('username')
+    with db:
+        all_symptoms = db.fetchAllSymptoms()
+        all_contradications = db.fetchAllContradications()
+        return render_template('patient_page.html', username=username, symptoms=all_symptoms,
+                               contras=all_contradications)
 
 
 @app.route('/create_drug')

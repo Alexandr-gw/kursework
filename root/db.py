@@ -120,8 +120,11 @@ class Database():
         drugs = self.session.query(Drug).all()
         return drugs
 
-    def fetchDrugfromSymptom(self):
-        pass
+    def fetchDrugfromSymptom(self, symptom_name):
+        drugs = self.session.query(Drug).filter(Drug.symptom_name == symptom_name).all()
+        return drugs
+
+    # def fetchDrugFromNameSymptomContra(self, drug_name, ):
 
     def close(self):
         self.session.close()
@@ -129,3 +132,7 @@ class Database():
     def createContradication(self, contradiction):
         self.session.add(contradiction)
         print("Contradiction created successfully!")
+
+    def fetchAllContradications(self):
+        contras = self.session.query(Contraindication).all()
+        return contras

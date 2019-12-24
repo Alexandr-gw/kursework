@@ -3,12 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <label class="navbar-brand">doctor's name here</label>
+    <label class="navbar-brand">{{username}}</label>
     <a href="{{url_for('logout')}}" class="btn btn-danger">Log out</a>
 </nav>
-Patient
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Symptoms</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for symptom in symptoms %}
+    <tr>
+        <td><input type="checkbox" name="symptom_list" value="{{symptom.symptom_name}}"> {{symptom.symptom_name}}</td>
+        <td class="d-flex justify-content-end">
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">contraindications</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contra in contras %}
+    <tr>
+        <td><input type="checkbox" name="contras_list" value="{{contra.name}}"> {{contra.name}}</td>
+        <td class="d-flex justify-content-end">
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 </body>
 </html>
