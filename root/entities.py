@@ -16,7 +16,7 @@ class Doctor(Base):
 
 
 class Patient(Base):
-    __tablename__ = "doctor"
+    __tablename__ = "patient"
     username = Column(String, primary_key=True)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
@@ -31,12 +31,14 @@ class Symptom(Base):
 
 
 class Contraindication(Base):
+    __tablename__ = 'contradiction'
     name = Column(String, primary_key=True)
     additional_info = Column(String, nullable=True)
     drug = relationship("Drug", cascade="all, delete", passive_deletes=True)
 
 
 class Drug(Base):
+    __tablename__ = 'drug'
     drug_name = Column(String, primary_key=True)
     price = Column(Float, nullable=False)
     symptom_name = Column(String, ForeignKey(Symptom.symptom_name, ondelete="cascade"), primary_key=True)
