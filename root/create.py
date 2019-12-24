@@ -1,8 +1,11 @@
 from root.db import Database
-from root.entities import Base
+from root.entities import Base, Doctor
 
 db = Database()
 Base.metadata.create_all(db.engine)
+
+
+#doctor1 = Doctor(doctor_username='doctor1', )
 
 #
 # player1 = Player(player_username='pashazopin1', balance=120, passwrd='passw')
