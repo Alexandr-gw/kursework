@@ -13,6 +13,7 @@ class Doctor(Base):
     doctor_username = Column(String, primary_key=True)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
+    doctor_password = Column(String, nullable=False)
 
 
 class Patient(Base):
@@ -22,7 +23,7 @@ class Patient(Base):
     surname = Column(String, nullable=False)
     birthdate = Column(TIMESTAMP, nullable=False)
     sex = Column(String, nullable=False)
-
+    patient_password = Column(String, nullable=False)
 
 class Symptom(Base):
     __tablename__ = 'symptom'
