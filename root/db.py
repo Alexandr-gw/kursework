@@ -117,8 +117,11 @@ class Database():
         print("Drug created successfully!")
 
     def fetchAllDrugs(self):
-        casinos = self.session.query(Drug).all()
-        return casinos
+        drugs = self.session.query(Drug).all()
+        return drugs
+
+    def fetchDrugfromSymptom(self):
+        pass
 
     def close(self):
         self.session.close()
