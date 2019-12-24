@@ -1,10 +1,15 @@
-from flask import Flask
 from flask import request, url_for, render_template, Flask, session
 from werkzeug.utils import redirect
+
+from root.db import Database
+from root.tools import get_patients, get_doctors
 
 app = Flask(__name__)
 SECRET_KEY = "Secret key"
 app.config['SECRET_KEY'] = SECRET_KEY
+
+db = Database()
+app.config['SQLALCHEMY_DATABASE_URI'] = db.cstr
 
 
 @app.route('/')
@@ -16,12 +21,21 @@ def hello():
 def login():
     error = None
     if request.method == 'POST':
-        print(request.form['exampleRadios'])
-        if request.form['username'] == 'doctor' and request.form['password'] == 'doctor':
-            return redirect('/doctor')
-        elif request.form['username'] == 'patient' and request.form['password'] == 'patient':
-            return redirect('/patient')
-        error = 'Invalid Credentials. Please try again.'
+        user_type = request.form['exampleRadios']
+        username =  request.form['username']
+        password = request.form['password']
+        if user_type == 'patient':
+            patients = get_patients(db)
+            for patient in patients:
+                if patient['username'] == username and patient['patient_password'] == password:
+                    return redirect('/patient')
+            error = 'There is no patient with this credentials'
+        elif user_type == 'doctor':
+            doctors = get_doctors(db)
+            for doctor in doctors:
+                if doctor['doctor_username'] == username and doctor['doctor_password'] == password:
+                    return redirect('/doctor')
+            error = 'There is no doctor with this credentials'
     return render_template('login.html', error=error)
 
 
