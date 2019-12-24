@@ -16,6 +16,7 @@ def hello():
 def login():
     error = None
     if request.method == 'POST':
+        print(request.form['exampleRadios'])
         if request.form['username'] == 'doctor' and request.form['password'] == 'doctor':
             return redirect('/doctor')
         elif request.form['username'] == 'patient' and request.form['password'] == 'patient':
