@@ -4,6 +4,15 @@ from root.entities import Base, Doctor, Patient, Symptom, Contraindication, Drug
 db = Database()
 Base.metadata.create_all(db.engine)
 
+# patient1 = Patient(username='helthyone', name='Bob',surname='Merlyn',birthdate='1998-06-22',sex='male',patient_password='asdasdzxczxcqweqwe123')
+# patient2 = Patient(username='mestapesta', name='Karl',surname='Noster',birthdate='1997-12-03',sex='male',patient_password='Passwordqwerty')
+# patient3 = Patient(username='greenhorse', name='Klaudia',surname='Lobster',birthdate='1996-09-12',sex='female',patient_password='myStrongPassword')
+#
+#
+# with db:
+#     db.createPatient(patient1)
+#     db.createPatient(patient2)
+#     db.createPatient(patient3)
 
 #
 # doctor1 = Doctor(doctor_username='mr.Help', name='Andrea', surname='Krentson', doctor_password='my_password12')
