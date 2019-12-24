@@ -23,9 +23,15 @@ def login():
         error = 'Invalid Credentials. Please try again.'
     return render_template('login.html', error=error)
 
+
 @app.route('/patient')
 def patient():
     return render_template('patient_page.html')
+
+
+@app.route('create_drug')
+def create_drug():
+    return render_template('make_drug.html')
 
 
 @app.route('/doctor')
