@@ -5,7 +5,18 @@ db = Database()
 Base.metadata.create_all(db.engine)
 
 
-#doctor1 = Doctor(doctor_username='doctor1', )
+doctor1 = Doctor(doctor_username='superdoctor1', name='doctor1',surname='doctorsuper1', doctor_password='superdoctor1')
+doctor2 = Doctor(doctor_username='superdoctor2', name='doctor2',surname='doctorsuper2', doctor_password='superdoctor2')
+doctor3 = Doctor(doctor_username='superdoctor3', name='doctor3',surname='doctorsuper3', doctor_password='superdoctor3')
+
+with db:
+    db.createDoctor(doctor1)
+    db.createDoctor(doctor2)
+    db.createDoctor(doctor3)
+
+
+
+
 
 #
 # player1 = Player(player_username='pashazopin1', balance=120, passwrd='passw')
