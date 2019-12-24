@@ -11,9 +11,11 @@ def hello():
     return render_template('start_page.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return "Logged in"
+    if request.method == 'POST':
+        return "Logged in"
+    return "Here"
 
 
 if __name__ == '__main__':
