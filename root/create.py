@@ -34,25 +34,25 @@ Base.metadata.create_all(db.engine)
 #     db.createSymptom(symptom2)
 #     db.createSymptom(symptom3)
 
-contraindication1 = Contraindication(name='conta1', additional_info='pusto1')
-contraindication2 = Contraindication(name='conta2', additional_info='pusto2')
-contraindication3 = Contraindication(name='conta3', additional_info='pusto3')
-
-with db:
-    db.createContraindication(contraindication1)
-    db.createContraindication(contraindication2)
-    db.createContraindication(contraindication3)
-#
-# drug1 = Drug(drug_name='drug1', price=123, symptom_name='symptom1', contraindication='contra1')
-# drug2 = Drug(drug_name='drug2', price=144, symptom_name='symptom2', contraindication='contra2')
-# drug3 = Drug(drug_name='drug3', price=96, symptom_name='symptom3', contraindication='contra3')
+# contraindication1 = Contraindication(name='conta1', additional_info='pusto1')
+# contraindication2 = Contraindication(name='conta2', additional_info='pusto2')
+# contraindication3 = Contraindication(name='conta3', additional_info='pusto3')
 #
 # with db:
-#     db.createDrug(drug1)
-#     db.createDrug(drug2)
-#     db.createDrug(drug3)
+#     db.createContradication(contraindication1)
+#     db.createContradication(contraindication2)
+#     db.createContradication(contraindication3)
 
-#
+drug1 = Drug(drug_name='drug1', price=123, symptom_name='symptom1', contraindication='contra1')
+drug2 = Drug(drug_name='drug2', price=144, symptom_name='symptom2', contraindication='contra2')
+drug3 = Drug(drug_name='drug3', price=96,  symptom_name='symptom3', contraindication='contra3')
+
+with db:
+    db.createDrug(drug1)
+    db.createDrug(drug2)
+    db.createDrug(drug3)
+
+
 # player1 = Player(player_username='pashazopin1', balance=120, passwrd='passw')
 # player2 = Player(player_username='pashazopin2', balance=220, passwrd='mypassw')
 # player3 = Player(player_username='pashazopin3', balance=320, passwrd='newpassw')
