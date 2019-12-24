@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,7 +21,7 @@ class Patient(Base):
     username = Column(String, primary_key=True)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
-    birthdate = Column(TIMESTAMP, nullable=False)
+    birthdate = Column(Date, nullable=False)
     sex = Column(String, nullable=False)
     patient_password = Column(String, nullable=False)
 
