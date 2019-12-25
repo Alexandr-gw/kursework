@@ -64,7 +64,9 @@ def logout():
 
 @app.route('/doctor')
 def doctor():
-    return render_template('doctor_page.html')
+    with db:
+        drugs = db.fetchAllDrugs()
+        return render_template('doctor_page.html', drugs=drugs, username=session.get('username'))
 
 
 @app.route('/show_drugs', methods=['GET', 'POST'])

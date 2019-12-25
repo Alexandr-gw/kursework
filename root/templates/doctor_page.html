@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Doctor page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <label class="navbar-brand">doctor's name here</label>
-    <a class="btn btn-light" href="{{url_for('create_drug')}}">Create drug</a>
-    <a href="{{url_for('logout')}}" class="btn btn-danger">Log out</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <label class="navbar-brand">{{username}}</label>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="btn btn-dark" href="{{url_for('create_drug')}}">Create drug</a>
+            <a href="{{url_for('logout')}}" class="btn btn-danger">Log out</a>
+        </div>
+    </div>
 </nav>
-doctor
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Drug</th>
+        <th scope="col">Symptom</th>
+        <th scope="col">Contraindication</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for drug in drugs %}
+    <tr>
+        <td><input type="checkbox" name="drug_list" value="{{drug.drug_name}}"> {{drug.drug_name}}</td>
+        <td><input type="checkbox" name="drug_list" value="{{drug.symptom_name}}"> {{drug.symptom_name}}</td>
+        <td><input type="checkbox" name="drug_list" value="{{drug.contraindication}}"> {{drug.contraindication}}</td>
+        <td><input type="checkbox" name="drug_list" value="{{drug.price}}"> {{drug.price}}</td>
+        <td class="d-flex justify-content-end">
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
 </body>
 </html>
