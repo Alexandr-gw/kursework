@@ -51,3 +51,25 @@ def handle_extra_info(param):
     if param == '':
         return None
     return str(param)
+
+
+def validate_doctor(username, name, surname, password, password1):
+    db = Database()
+    with db:
+        doctor = db.fetchDoctor(username)
+        if doctor:
+            return "This username is occupied by other doctor. Please choose another"
+        if password1 != password:
+            return "Passwords don't match"
+    return None
+
+
+def validate_patient(username, name, surname, password, password1):
+    db = Database()
+    with db:
+        patient = db.fetchDoctor(username)
+        if patient:
+            return "This username is occupied by other patient. Please choose another"
+        if password1 != password:
+            return "Passwords don't match"
+    return None

@@ -2,8 +2,8 @@ from flask import request, url_for, render_template, Flask, session
 from werkzeug.utils import redirect
 
 from root.db import Database
-from root.entities import Symptom, Contraindication, Drug
-from root.tools import get_patients, get_doctors, checkValues, handle_extra_info
+from root.entities import Symptom, Contraindication, Drug, Doctor, Patient
+from root.tools import get_patients, get_doctors, checkValues, handle_extra_info, validate_doctor, validate_patient
 
 app = Flask(__name__)
 SECRET_KEY = "Secret key"
@@ -47,9 +47,9 @@ def patient():
     username = session.get('username')
     with db:
         all_symptoms = db.fetchAllSymptoms()
-        all_contradications = db.fetchAllContraindications()
+        all_contraindications = db.fetchAllContraindications()
         return render_template('patient_page.html', username=username, symptoms=all_symptoms,
-                               contras=all_contradications)
+                               contras=all_contraindications)
 
 
 @app.route('/create_drug', methods=['GET', 'POST'])
@@ -94,6 +94,42 @@ def show_drugs():
         symp = request.form.getlist('symptom_list')
         contr = request.form.getlist('contras_list')
     return render_template('no_drugs_page.html', username=session.get('username'))
+
+
+@app.route('/signup_patient', methods=['GET', 'POST'])
+def signup_patient():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        surname = request.form['surname']
+        password = request.form['password']
+        password1 = request.form['password1']
+        error = validate_patient(username, name, surname, password, password1)
+        if not error:
+            with db:
+                patient = Patient(username=username, name=name, surname=surname, patient_password=password)
+                db.createPatient(patient)
+    return render_template('signup_patient.html', error=error)
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        surname = request.form['surname']
+        password = request.form['password']
+        password1 = request.form['password1']
+        error = validate_doctor(username, name, surname, password, password1)
+        if not error:
+            with db:
+                doctor = Doctor(doctor_username=username, name=name,
+                                surname=str(surname), doctor_password=password)
+                db.createDoctor(doctor)
+
+    return render_template('signup.html', error=error)
 
 
 if __name__ == '__main__':
