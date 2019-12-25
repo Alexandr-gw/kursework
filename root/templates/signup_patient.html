@@ -47,6 +47,27 @@
                            required="required" value="{{request.form.new_password1}}"
                            class="form-control"/>
                 </div>
+                <div class="form-group">
+                    <label>Set your birthdate</label>
+                    <input type="date" id="birthdate" name="birthdate"
+                           value="2019-12-26" max="2019-12-26">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sex" id="exampleRadios1"
+                           value="male"
+                           checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sex" id="exampleRadios2"
+                           value="female">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Female
+                    </label>
+                </div>
+
                 <button type="submit" value="Sign-up!" class="btn btn-black">Sign up</button>
 
             </form>

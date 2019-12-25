@@ -105,11 +105,17 @@ def signup_patient():
         surname = request.form['surname']
         password = request.form['password']
         password1 = request.form['password1']
+        birthdate = request.form['birthdate']
+        sex = request.form['sex']
         error = validate_patient(username, name, surname, password, password1)
         if not error:
             with db:
-                patient = Patient(username=username, name=name, surname=surname, patient_password=password)
+                patient = Patient(username=username, name=name, surname=surname, patient_password=password,
+                                  birthdate=birthdate,
+                                  sex=sex)
                 db.createPatient(patient)
+                session['username'] = username
+                return redirect('/patient')
     return render_template('signup_patient.html', error=error)
 
 
@@ -128,7 +134,8 @@ def signup():
                 doctor = Doctor(doctor_username=username, name=name,
                                 surname=str(surname), doctor_password=password)
                 db.createDoctor(doctor)
-
+            session['username'] = username
+            return redirect('/doctor')
     return render_template('signup.html', error=error)
 
 
