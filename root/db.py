@@ -112,8 +112,8 @@ class Database():
         self.session.delete(symptomData)
         print("Symptom deleted successfully!")
 
-    def createDrug(self, casino):
-        self.session.add(casino)
+    def createDrug(self, drug):
+        self.session.add(drug)
         print("Drug created successfully!")
 
     def fetchAllDrugs(self):
