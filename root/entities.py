@@ -25,6 +25,7 @@ class Patient(Base):
     sex = Column(String, nullable=False)
     patient_password = Column(String, nullable=False)
 
+
 class Symptom(Base):
     __tablename__ = 'symptom'
     symptom_name = Column(String, primary_key=True)

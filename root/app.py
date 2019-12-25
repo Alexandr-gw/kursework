@@ -2,7 +2,8 @@ from flask import request, url_for, render_template, Flask, session
 from werkzeug.utils import redirect
 
 from root.db import Database
-from root.tools import get_patients, get_doctors
+from root.entities import Symptom, Contraindication, Drug
+from root.tools import get_patients, get_doctors, checkValues, handle_extra_info
 
 app = Flask(__name__)
 SECRET_KEY = "Secret key"
@@ -51,9 +52,27 @@ def patient():
                                contras=all_contradications)
 
 
-@app.route('/create_drug')
+@app.route('/create_drug', methods=['GET', 'POST'])
 def create_drug():
-    return render_template('make_drug.html')
+    error = None
+    if request.method == 'POST':
+        drug = request.form['drug_name']
+        symptom = request.form['symptom']
+        contra = request.form['contra']
+        price = request.form['price']
+        extra_info = handle_extra_info(request.form['extra_contra'])
+
+        error = checkValues(drug, symptom, contra, price)
+        if not error:
+            db_symptom = Symptom(symptom_name=symptom)
+            db_contra = Contraindication(name=contra, additional_info=extra_info)
+            db_drug = Drug(drug_name=drug, price=price, symptom_name=symptom, contraindication=contra)
+            with db:
+                db.createSymptom(db_symptom)
+                db.createContraindication(db_contra)
+                db.createDrug(db_drug)
+            return redirect('/doctor')
+    return render_template('make_drug.html', error=error)
 
 
 @app.route('/logout')

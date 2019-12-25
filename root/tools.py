@@ -1,3 +1,7 @@
+import traceback
+
+from root.db import Database
+
 
 def get_doctors(db):
     doctors = []
@@ -18,3 +22,32 @@ def get_patients(db):
             b = db_patient.patient_password
             patients.append({'username': a, 'patient_password': b})
     return patients
+
+
+def unique_drug(drug):
+    db = Database()
+    with db:
+        all_drugs = db.fetchAllDrugs()
+        for db_drug in all_drugs:
+            if db_drug.drug_name == drug:
+                return False
+    return True
+
+
+def checkValues(drug, symptom, contra, price):
+    if unique_drug(drug):
+        try:
+            float_price = float(price)
+            if float_price <= 0:
+                return "Price should be a positive number"
+            return None
+        except ValueError:
+            traceback.print_exc()
+            return "Price should be a positive number"
+    return "This Drug already exists!"
+
+
+def handle_extra_info(param):
+    if param == '':
+        return None
+    return str(param)

@@ -30,10 +30,10 @@
     <tbody>
     {% for drug in drugs %}
     <tr>
-        <td><input type="checkbox" name="drug_list" value="{{drug.drug_name}}"> {{drug.drug_name}}</td>
-        <td><input type="checkbox" name="drug_list" value="{{drug.symptom_name}}"> {{drug.symptom_name}}</td>
-        <td><input type="checkbox" name="drug_list" value="{{drug.contraindication}}"> {{drug.contraindication}}</td>
-        <td><input type="checkbox" name="drug_list" value="{{drug.price}}"> {{drug.price}}</td>
+        <td>{{drug.drug_name}}</td>
+        <td>{{drug.symptom_name}}</td>
+        <td>{{drug.contraindication}}</td>
+        <td>{{drug.price}}</td>
         <td class="d-flex justify-content-end">
     </tr>
     {% endfor %}
