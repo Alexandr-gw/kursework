@@ -129,10 +129,10 @@ class Database():
     def close(self):
         self.session.close()
 
-    def createContradication(self, contradiction):
+    def createContraindication(self, contradiction):
         self.session.add(contradiction)
         print("Contradiction created successfully!")
 
-    def fetchAllContradications(self):
+    def fetchAllContraindications(self):
         contras = self.session.query(Contraindication).all()
         return contras

@@ -7,10 +7,11 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <label class="navbar-brand">{{username}}</label>
-    <a href="{{url_for('logout')}}" class="btn btn-danger">Log out</a>
-</nav>
+
+{% extends 'navbar.html' %}
+{%block content %}
+{{ super() }}
+
 <form action="/show_drugs" method="post">
     <table class="table table-striped">
         <thead>
@@ -49,6 +50,7 @@
 
 </form>
 
+{% endblock %}
 
 </body>
 </html>

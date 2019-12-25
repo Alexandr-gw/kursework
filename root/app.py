@@ -46,7 +46,7 @@ def patient():
     username = session.get('username')
     with db:
         all_symptoms = db.fetchAllSymptoms()
-        all_contradications = db.fetchAllContradications()
+        all_contradications = db.fetchAllContraindications()
         return render_template('patient_page.html', username=username, symptoms=all_symptoms,
                                contras=all_contradications)
 
@@ -58,19 +58,21 @@ def create_drug():
 
 @app.route('/logout')
 def logout():
-    return "logged out"
+    session.pop('username', None)
+    return redirect('/login')
 
 
 @app.route('/doctor')
 def doctor():
     return render_template('doctor_page.html')
 
+
 @app.route('/show_drugs', methods=['GET', 'POST'])
 def show_drugs():
     if request.method == 'POST':
-        symp =  request.form.getlist('symptom_list')
+        symp = request.form.getlist('symptom_list')
         contr = request.form.getlist('contras_list')
-
+    return render_template('no_drugs_page.html', username=session.get('username'))
 
 
 if __name__ == '__main__':
