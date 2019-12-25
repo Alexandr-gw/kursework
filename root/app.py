@@ -25,6 +25,8 @@ def login():
         user_type = request.form['exampleRadios']
         username = request.form['username']
         password = request.form['password']
+        if username == 'admin' and password == 'admin':
+            return redirect('/admin')
         if user_type == 'patient':
             patients = get_patients(db)
             for patient in patients:
@@ -40,6 +42,15 @@ def login():
                     return redirect('/doctor')
             error = 'There is no doctor with this credentials'
     return render_template('login.html', error=error)
+
+
+@app.route('/admin')
+def admin():
+    with db:
+        all_patients = db.fetchAllPatients()
+        all_doctors = db.fetchAllDoctors()
+        all_drugs = db.fetchAllDrugs()
+        return render_template('admin_page.html', all_doctors=all_doctors, all_patients=all_patients, drugs=all_drugs)
 
 
 @app.route('/patient')
