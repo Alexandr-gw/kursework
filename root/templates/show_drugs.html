@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% extends 'navbar.html' %}
+{%block content %}
+{{ super() }}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Drug name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Symptom</th>
+        <th scope="col">Contraindication</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for drug in drugs %}
+    <tr>
+        <td>{{drug.drug_name}}</td>
+        <td>{{drug.price}}</td>
+        <td>{{drug.symptom_name}}</td>
+        <td>{{drug.contraindication}}</td>
+        <td class="d-flex justify-content-end">
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+
+</body>
+</html>

@@ -91,8 +91,24 @@ def doctor():
 @app.route('/show_drugs', methods=['GET', 'POST'])
 def show_drugs():
     if request.method == 'POST':
-        symp = request.form.getlist('symptom_list')
-        contr = request.form.getlist('contras_list')
+        symptoms = request.form.getlist('symptom_list')
+        contras = request.form.getlist('contras_list')
+        drug_list = []
+        with db:
+            for symp in symptoms:
+                tmp_drugs = db.fetchDrugfromSymptom(symp)
+                for tmp_drug in tmp_drugs:
+                    drug_pass = True
+                    for cont in contras:
+                        a = tmp_drug.contraindication
+                        if a == cont:
+                            drug_pass = False
+                    if drug_pass:
+                        drug_list.append(tmp_drug)
+            if len(drug_list):
+                return render_template('show_drugs.html', username=session.get('username'),
+                                       drugs=drug_list)
+
     return render_template('no_drugs_page.html', username=session.get('username'))
 
 
