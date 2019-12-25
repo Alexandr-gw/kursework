@@ -25,6 +25,10 @@
         <td>{{drug.contraindication}}</td>
         <td>{{drug.price}}</td>
         <td class="d-flex justify-content-end">
+            <a href="{{url_for('delete_drug', drug_name=drug.drug_name)}}"
+               class="btn btn-danger">Delete</a>
+
+        </td>
     </tr>
     {% endfor %}
     </tbody>
@@ -49,6 +53,10 @@
         <td>{{doctor.surname}}</td>
         <td>{{doctor.doctor_password}}</td>
         <td class="d-flex justify-content-end">
+            <a href="{{url_for('delete_doctor', doctor_username=doctor.doctor_username)}}"
+               class="btn btn-danger">Delete</a>
+
+        </td>
     </tr>
     {% endfor %}
     </tbody>
@@ -76,6 +84,10 @@
         <td>{{patient.sex}}</td>
         <td>{{patient.patient_password}}</td>
         <td class="d-flex justify-content-end">
+            <a href="{{url_for('delete_patient', patient_username=patient.username)}}"
+               class="btn btn-danger">Delete</a>
+
+        </td>
     </tr>
     {% endfor %}
     </tbody>

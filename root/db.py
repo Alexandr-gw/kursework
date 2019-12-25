@@ -120,11 +120,20 @@ class Database():
         drugs = self.session.query(Drug).all()
         return drugs
 
+    def deleteDrug(self, drug_name):
+        patientData = self.session.query(Drug).filter(Drug.drug_name == drug_name).first()
+        self.session.delete(patientData)
+        print("Drug deleted successfully!")
+
     def fetchDrugfromSymptom(self, symptom_name):
         drugs = self.session.query(Drug).filter(Drug.symptom_name == symptom_name).all()
         return drugs
 
-    # def fetchDrugFromNameSymptomContra(self, drug_name, ):
+    def updateDrug(self, drug_name, price):
+        dataToUpdate = {Drug.price: price}
+        drugData = self.session.query(Drug).filter(Drug.drug_name == drug_name)
+        drugData.update(dataToUpdate)
+        print("Drug updated successfully!")
 
     def close(self):
         self.session.close()

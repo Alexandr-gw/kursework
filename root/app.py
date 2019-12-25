@@ -63,6 +63,13 @@ def patient():
                                contras=all_contraindications)
 
 
+@app.route('/patients/delete/<patient_username>')
+def delete_patient(patient_username):
+    with db:
+        db.deletePatient(patient_username)
+    return redirect(url_for("admin"))
+
+
 @app.route('/create_drug', methods=['GET', 'POST'])
 def create_drug():
     error = None
@@ -83,7 +90,14 @@ def create_drug():
                 db.createContraindication(db_contra)
                 db.createDrug(db_drug)
             return redirect('/doctor')
-    return render_template('make_drug.html', error=error)
+    return render_template('make_drug.html', error=error, username=session.get('username'))
+
+
+@app.route('/drugs/delete/<drug_name>')
+def delete_drug(drug_name):
+    with db:
+        db.deleteDrug(drug_name)
+    return redirect(url_for("admin"))
 
 
 @app.route('/logout')
@@ -97,6 +111,13 @@ def doctor():
     with db:
         drugs = db.fetchAllDrugs()
         return render_template('doctor_page.html', drugs=drugs, username=session.get('username'))
+
+
+@app.route('/doctors/delete/<doctor_username>')
+def delete_doctor(doctor_username):
+    with db:
+        db.deleteDoctor(doctor_username)
+    return redirect(url_for("admin"))
 
 
 @app.route('/show_drugs', methods=['GET', 'POST'])
